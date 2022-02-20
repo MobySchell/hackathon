@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-export default class home extends Component {
+export default class About extends Component {
   render() {
     return (
       <>
         <main>
-          <h2>Welcome to the homepage!</h2>
-          <p>You can do this, I believe in you.</p>
+          <h2>Who are we?</h2>
+          <p>That feels like an existential question, don't you think?</p>
         </main>
         <nav>
-          <Link to="/about">About</Link>
+          <Link to="/">Home</Link>
         </nav>
       </>
     );
