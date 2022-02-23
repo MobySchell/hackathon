@@ -1,17 +1,34 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 export default class home extends Component {
   render() {
     return (
       <>
-        <main>
-          <h2>Welcome to the homepage!</h2>
-          <p>You can do this, I believe in you.</p>
-        </main>
-        <nav>
-          <Link to="/about">About</Link>
-        </nav>
+        <div className="container">
+          <div className="my-5"></div>
+          <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">
+              Email
+            </label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                readonly
+                class="form-control-plaintext"
+                id="staticEmail"
+                value="email@example.com"
+              />
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">
+              Password
+            </label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword" />
+            </div>
+          </div>
+        </div>
       </>
     );
   }

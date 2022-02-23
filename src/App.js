@@ -2,24 +2,24 @@ import "./App.css";
 import React, { Component } from "react";
 
 import { Routes, Route } from "react-router-dom";
-import firebase from "./firebase/firebase";
+import Navbar from "./components/Navbar";
 
 import Home from "./components/Home.js";
 import About from "./components/About.js";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.db = firebase.firestore();
-  }
+  // }
 
   render() {
     return (
       <div className="App">
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="about" element={<About />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </div>
     );

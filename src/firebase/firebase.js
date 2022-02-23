@@ -1,8 +1,6 @@
-import firebase from "firebase";
-import "firebase/firestore";
-import "firebase/auth";
+import Firebase from "firebase/compat/app";
 
-firebase.initializeApp({
+Firebase.initializeApp({
   apiKey: "AIzaSyAeuMa0Kyjglrcij7PlCBk2RGCHn0fhIqI",
   authDomain: "hackathon-89908.firebaseapp.com",
   projectId: "hackathon-89908",
@@ -12,4 +10,4 @@ firebase.initializeApp({
   measurementId: "G-0RET17MK3F",
 });
 
-export default firebase;
+export default Firebase;
