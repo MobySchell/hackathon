@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+
+import Login from "./components/Login.js";
+import Register from "./components/Register.js";
+import Admin from "./Admin/Admin";
+import PendingUsers from "./Admin/PendingUsers";
+import Users from "./Admin/Users";
+import Jobs from "./Admin/Jobs";
+import JobListings from "./components/JobListings";
+import Profile from "./components/Profile";
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/job-listings" element={<JobListings />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/pending-users" element={<PendingUsers />} />
+          <Route path="/admin/users" element={<Users />} />
+          <Route path="/admin/jobs" element={<Jobs />} />
+        </Routes>
+      </div>
+    );
+  }
 }
 
 export default App;
