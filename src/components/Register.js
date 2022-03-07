@@ -1,10 +1,31 @@
 import React, { Component } from "react";
 import galaxy from "../components/imgs/galaxyReg.jpg";
+import firebase from "./../firebase/firebase.js";
 
 export default class Register extends Component {
-  //
-  //  Todo: Change Register img to info card
-  //
+  constructor(props) {
+    super(props);
+
+    this.db = firebase.firestore();
+    this.auth = firebase.auth();
+
+    this.state = {
+      Name: "",
+      CellNumber: "",
+      Email: "",
+      Role: "",
+    };
+  }
+
+  onRegister() {}
+
+  onInputChange(e) {
+    console.log(e);
+    this.setState({
+      Name: e.target.value,
+    });
+  }
+
   render() {
     return (
       <>
@@ -26,6 +47,8 @@ export default class Register extends Component {
                     id="floatingFirstAndLastName"
                     placeholder="First And Last Name"
                     aria-describedby="textHelp"
+                    value={this.state.Name}
+                    onChange={(e) => this.onInputChange(e)}
                   />
                   <label for="floatingFirstAndLastName" className="form-label">
                     First And Last Name
@@ -39,6 +62,8 @@ export default class Register extends Component {
                     id="exampleInputTel"
                     placeholder="Phone Number"
                     aria-describedby="telHelp"
+                    value={this.state.CellNumber}
+                    onChange={(e) => this.onInputChange(e)}
                   />
                   <label for="exampleInputTel" className="form-label">
                     Your Phone Number
@@ -52,6 +77,8 @@ export default class Register extends Component {
                     id="exampleInputEmail1"
                     placeholder="Email Address"
                     aria-describedby="emailHelp"
+                    value={this.state.Email}
+                    onChange={(e) => this.onInputChange(e)}
                   />
                   <label for="exampleInputEmail1" className="form-label">
                     Your Email address
