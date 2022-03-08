@@ -13,20 +13,40 @@ export default class Register extends Component {
       Name: "",
       CellNumber: "",
       Email: "",
-      Role: "",
+      Role: "Employee",
+      password: "",
     };
   }
 
-  onRegister() {}
+  onRegister(e) {
+    e.preventDefault();
+  }
 
-  onInputChange(e) {
-    console.log(e);
+  // Value of the state
+  onNameChange(e) {
     this.setState({
       Name: e.target.value,
     });
   }
+  onCellNumberChange(e) {
+    this.setState({
+      CellNumber: e.target.value,
+    });
+  }
+  onEmailChange(e) {
+    this.setState({
+      Email: e.target.value,
+    });
+  }
+  onPasswordChange(e) {
+    this.setState({
+      password: e.target.value,
+    });
+  }
 
   render() {
+    const { Name, CellNumber, Email, password } = this.state;
+
     return (
       <>
         <div className="container">
@@ -35,11 +55,10 @@ export default class Register extends Component {
               <img className="w-100" src={galaxy} alt="Register" />
             </div>
             <div className="col p-5">
-              <form>
-                <div>
-                  <h1>Join the Team</h1>
-                </div>
-
+              <div>
+                <h1>Join the Team</h1>
+              </div>
+              <form onSubmit={(e) => this.onRegister(e)}>
                 <div className="form-floating mb-3 mt-5">
                   <input
                     type="text"
@@ -47,10 +66,13 @@ export default class Register extends Component {
                     id="floatingFirstAndLastName"
                     placeholder="First And Last Name"
                     aria-describedby="textHelp"
-                    value={this.state.Name}
-                    onChange={(e) => this.onInputChange(e)}
+                    value={Name}
+                    onChange={(e) => this.onNameChange(e)}
                   />
-                  <label for="floatingFirstAndLastName" className="form-label">
+                  <label
+                    htmlFor="floatingFirstAndLastName"
+                    className="form-label"
+                  >
                     First And Last Name
                   </label>
                 </div>
@@ -62,10 +84,10 @@ export default class Register extends Component {
                     id="exampleInputTel"
                     placeholder="Phone Number"
                     aria-describedby="telHelp"
-                    value={this.state.CellNumber}
-                    onChange={(e) => this.onInputChange(e)}
+                    value={CellNumber}
+                    onChange={(e) => this.onCellNumberChange(e)}
                   />
-                  <label for="exampleInputTel" className="form-label">
+                  <label htmlFor="exampleInputTel" className="form-label">
                     Your Phone Number
                   </label>
                 </div>
@@ -77,10 +99,10 @@ export default class Register extends Component {
                     id="exampleInputEmail1"
                     placeholder="Email Address"
                     aria-describedby="emailHelp"
-                    value={this.state.Email}
-                    onChange={(e) => this.onInputChange(e)}
+                    value={Email}
+                    onChange={(e) => this.onEmailChange(e)}
                   />
-                  <label for="exampleInputEmail1" className="form-label">
+                  <label htmlFor="exampleInputEmail1" className="form-label">
                     Your Email address
                   </label>
                   <div id="emailHelp" className="form-text">
@@ -92,8 +114,10 @@ export default class Register extends Component {
                   <input
                     type="password"
                     className="form-control"
-                    id="exampleInputPassword1"
+                    id="newPassword"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => this.onPasswordChange(e)}
                   />
                 </div>
 
@@ -101,15 +125,15 @@ export default class Register extends Component {
                   <input
                     type="password"
                     className="form-control"
-                    id="exampleInputPassword1"
+                    id="validatePassword"
                     placeholder="Re-enter Password"
                   />
                 </div>
-
-                <button type="submit" className="btn btn-primary mt-3 px-5">
-                  Register
-                </button>
               </form>
+
+              <button type="submit" className="btn btn-primary mt-3 px-5">
+                Register
+              </button>
             </div>
           </div>
         </div>

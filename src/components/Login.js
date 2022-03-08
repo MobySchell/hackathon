@@ -2,7 +2,29 @@ import React, { Component } from "react";
 import galaxy from "../components/imgs/galaxy.jpg";
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      Email: "",
+      password: "",
+    };
+  }
+
+  onLogin(e) {
+    e.preventDefault();
+  }
+
+  onEmailChange(e) {
+    this.setState({ Email: e.target.value });
+  }
+  onPasswordChange(e) {
+    this.setState({ password: e.target.value });
+  }
+
   render() {
+    const { Email, password } = this.state;
+
     return (
       <>
         <div className="container">
@@ -11,7 +33,7 @@ export default class Login extends Component {
               <img className="w-100 " src={galaxy} alt="Login" />
             </div>
             <div className="col p-5">
-              <form>
+              <form onSubmit={(e) => this.onLogin(e)}>
                 <div>
                   <h1>Welcome Back</h1>
                 </div>
@@ -23,6 +45,8 @@ export default class Login extends Component {
                     id="exampleInputEmail1"
                     placeholder="Email"
                     aria-describedby="emailHelp"
+                    value={Email}
+                    onChange={(e) => this.onEmailChange(e)}
                   />
                   <label for="exampleInputEmail1" className="form-label">
                     Email address
@@ -35,6 +59,8 @@ export default class Login extends Component {
                     className="form-control"
                     id="exampleInputPassword1"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => this.onPasswordChange(e)}
                   />
                 </div>
                 <button type="submit" className="btn btn-primary mt-3 px-5">
