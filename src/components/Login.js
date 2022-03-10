@@ -1,18 +1,31 @@
 import React, { Component } from "react";
 import galaxy from "../components/imgs/galaxy.jpg";
+import firebase from "../firebase/firebase";
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
 
+    this.auth = firebase.auth();
+
     this.state = {
       Email: "",
       password: "",
+      error: "",
     };
   }
 
-  onLogin(e) {
+  async onLogin(e) {
     e.preventDefault();
+
+    try {
+      const { Email, password } = this.state;
+      const login = await this.auth.signInWithEmailAndPassword(Email, password);
+      console.log(login);
+      this.props.history.push("/job-listings");
+    } catch (err) {
+      this.setState({ error: err.message });
+    }
   }
 
   onEmailChange(e) {
@@ -23,7 +36,7 @@ export default class Login extends Component {
   }
 
   render() {
-    const { Email, password } = this.state;
+    const { Email, password, error } = this.state;
 
     return (
       <>
@@ -66,6 +79,14 @@ export default class Login extends Component {
                 <button type="submit" className="btn btn-primary mt-3 px-5">
                   Login
                 </button>
+
+                {error ? (
+                  <div class="alert alert-danger mt-3" role="alert">
+                    {error}
+                  </div>
+                ) : (
+                  <div></div>
+                )}
               </form>
             </div>
           </div>
