@@ -6,20 +6,34 @@ export default class Register extends Component {
   constructor(props) {
     super(props);
 
+    console.log(props);
+
     this.db = firebase.firestore();
     this.auth = firebase.auth();
 
     this.state = {
       Name: "",
       CellNumber: "",
-      Email: "",
+      email: "",
       Role: "Employee",
       password: "",
+      error: "",
     };
   }
 
-  onRegister(e) {
+  async onRegister(e) {
     e.preventDefault();
+
+    try {
+      const { email, password } = this.state;
+      const register = await this.auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      console.log(register);
+    } catch (err) {
+      this.setState({ error: err.message });
+    }
   }
 
   // Value of the state
@@ -35,7 +49,7 @@ export default class Register extends Component {
   }
   onEmailChange(e) {
     this.setState({
-      Email: e.target.value,
+      email: e.target.value,
     });
   }
   onPasswordChange(e) {
@@ -45,7 +59,7 @@ export default class Register extends Component {
   }
 
   render() {
-    const { Name, CellNumber, Email, password } = this.state;
+    const { Name, CellNumber, email, password, error } = this.state;
 
     return (
       <>
@@ -99,7 +113,7 @@ export default class Register extends Component {
                     id="exampleInputEmail1"
                     placeholder="Email Address"
                     aria-describedby="emailHelp"
-                    value={Email}
+                    value={email}
                     onChange={(e) => this.onEmailChange(e)}
                   />
                   <label htmlFor="exampleInputEmail1" className="form-label">
@@ -129,11 +143,19 @@ export default class Register extends Component {
                     placeholder="Re-enter Password"
                   />
                 </div>
-              </form>
 
-              <button type="submit" className="btn btn-primary mt-3 px-5">
-                Register
-              </button>
+                <button type="submit" className="btn btn-primary mt-3 px-5">
+                  Register
+                </button>
+
+                {error ? (
+                  <div class="alert alert-danger mt-3" role="alert">
+                    {error}
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+              </form>
             </div>
           </div>
         </div>

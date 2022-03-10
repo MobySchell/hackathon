@@ -13,21 +13,46 @@ import Jobs from "./Admin/Jobs";
 import JobListings from "./components/JobListings";
 import Profile from "./components/Profile";
 
+import firebase from "./firebase/firebase";
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.auth = firebase.auth();
+
+    this.state = {
+      user: null,
+      loading: true,
+    };
+  }
+
+  componentDidMount() {
+    this.auth.onAuthStateChanged((user) => {
+      this.setState({ user: user, loading: false });
+    });
+  }
+
   render() {
+    const { user, loading } = this.state;
+
     return (
       <div className="App">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/job-listings" element={<JobListings />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/pending-users" element={<PendingUsers />} />
-          <Route path="/admin/users" element={<Users />} />
-          <Route path="/admin/jobs" element={<Jobs />} />
-        </Routes>
+        <Navbar user={user} />
+        {loading ? (
+          <div>Loading</div>
+        ) : (
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/job-listings" element={<JobListings />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/pending-users" element={<PendingUsers />} />
+            <Route path="/admin/users" element={<Users />} />
+            <Route path="/admin/jobs" element={<Jobs />} />
+          </Routes>
+        )}
       </div>
     );
   }

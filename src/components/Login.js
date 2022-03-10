@@ -22,7 +22,6 @@ export default class Login extends Component {
       const { Email, password } = this.state;
       const login = await this.auth.signInWithEmailAndPassword(Email, password);
       console.log(login);
-      this.props.history.push("/job-listings");
     } catch (err) {
       this.setState({ error: err.message });
     }
@@ -61,7 +60,7 @@ export default class Login extends Component {
                     value={Email}
                     onChange={(e) => this.onEmailChange(e)}
                   />
-                  <label for="exampleInputEmail1" className="form-label">
+                  <label htmlFor="exampleInputEmail1" className="form-label">
                     Email address
                   </label>
                 </div>
@@ -81,7 +80,7 @@ export default class Login extends Component {
                 </button>
 
                 {error ? (
-                  <div class="alert alert-danger mt-3" role="alert">
+                  <div className="alert alert-danger mt-3" role="alert">
                     {error}
                   </div>
                 ) : (

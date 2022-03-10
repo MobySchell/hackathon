@@ -3,9 +3,16 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 import "../../node_modules/bootstrap-icons/icons/sunset.svg";
 import "../../node_modules/bootstrap-icons/icons/list.svg";
 import { Link } from "react-router-dom";
+import firebase from "../firebase/firebase";
 
 export default class Navbar extends Component {
+  logout() {
+    firebase.auth().signOut();
+  }
+
   render() {
+    const { user } = this.props;
+
     return (
       <>
         <nav className="navbar navbar-expand-lg border-bottom border-primary border-3 shadow-sm">
@@ -31,56 +38,74 @@ export default class Navbar extends Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav navbar-right">
-                <li className="nav-item">
-                  <Link className="nav-link" to="/admin">
-                    <button
-                      type="button"
-                      className="btn btn-outline-primary shadow-sm"
-                    >
-                      Admin
-                    </button>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/">
-                    <button
-                      type="button"
-                      className="btn btn-outline-primary shadow-sm"
-                    >
-                      Login
-                    </button>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/register">
-                    <button
-                      type="button"
-                      className="btn btn-outline-primary shadow-sm"
-                    >
-                      Register
-                    </button>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/job-listings">
-                    <button
-                      type="button"
-                      className="btn btn-outline-primary shadow-sm"
-                    >
-                      Job Listings
-                    </button>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/profile">
-                    <button
-                      type="button"
-                      className="btn btn-outline-primary shadow-sm"
-                    >
-                      Profile
-                    </button>
-                  </Link>
-                </li>
+                {user ? (
+                  <div className="d-inline-flex">
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/admin">
+                        <button
+                          type="button"
+                          className="btn btn-outline-primary shadow-sm"
+                        >
+                          Admin
+                        </button>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/job-listings">
+                        <button
+                          type="button"
+                          className="btn btn-outline-primary shadow-sm"
+                        >
+                          Job Listings
+                        </button>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/profile">
+                        <button
+                          type="button"
+                          className="btn btn-outline-primary shadow-sm"
+                        >
+                          Profile
+                        </button>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/">
+                        <button
+                          type="button"
+                          className="btn btn-outline-primary shadow-sm"
+                          onClick={() => this.logout()}
+                        >
+                          Logout
+                        </button>
+                      </Link>
+                    </li>
+                  </div>
+                ) : (
+                  <div className="d-inline-flex">
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/">
+                        <button
+                          type="button"
+                          className="btn btn-outline-primary shadow-sm"
+                        >
+                          Login
+                        </button>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/register">
+                        <button
+                          type="button"
+                          className="btn btn-outline-primary shadow-sm"
+                        >
+                          Register
+                        </button>
+                      </Link>
+                    </li>
+                  </div>
+                )}
               </ul>
             </div>
           </div>
