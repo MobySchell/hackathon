@@ -26,11 +26,16 @@ export default class Register extends Component {
 
     try {
       const { email, password } = this.state;
-      const register = await this.auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      console.log(register);
+      await this.auth.createUserWithEmailAndPassword(email, password);
+
+      this.setState({
+        Name: "",
+        CellNumber: "",
+        email: "",
+        password: "",
+        passCheck: "",
+        error: "",
+      });
     } catch (err) {
       this.setState({ error: err.message });
     }
@@ -57,9 +62,14 @@ export default class Register extends Component {
       password: e.target.value,
     });
   }
+  onPassCheck(e) {
+    this.setState({
+      passCheck: e.target.value,
+    });
+  }
 
   render() {
-    const { Name, CellNumber, email, password, error } = this.state;
+    const { Name, CellNumber, email, password, passCheck, error } = this.state;
 
     return (
       <>
@@ -141,6 +151,8 @@ export default class Register extends Component {
                     className="form-control"
                     id="validatePassword"
                     placeholder="Re-enter Password"
+                    value={passCheck}
+                    onChange={(e) => this.onPassCheck(e)}
                   />
                 </div>
 

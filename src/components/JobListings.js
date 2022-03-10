@@ -10,70 +10,29 @@ export default class JobListings extends Component {
 
           <div>
             <div className="container row row-cols-2 d-flex justify-content-center">
-              <div
-                class="card text-start p-0 m-3 shadow"
-                style={{ maxWidth: 450 }}
-              >
-                <div class="card-header">Company Name</div>
-                <div class="card-body">
-                  <h5 class="card-title">Position</h5>
-                  <p class="card-text">
-                    Job Details: Where it is and maybe possible pay on it
-                  </p>
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop"
+              {this.props.jobs.map((job) => {
+                return (
+                  <div
+                    key={job.id}
+                    class="card text-start p-0 m-3 shadow"
+                    style={{ maxWidth: 450 }}
                   >
-                    Apply
-                  </button>
-                </div>
-              </div>
-
-              <div
-                class="card text-start p-0 m-3 shadow"
-                style={{ maxWidth: 450 }}
-              >
-                <div class="card-header">Company Name</div>
-                <div class="card-body">
-                  <h5 class="card-title">Position</h5>
-                  <p class="card-text">
-                    Job Details: Where it is and maybe possible pay on it
-                  </p>
-
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop"
-                  >
-                    Apply
-                  </button>
-                </div>
-              </div>
-
-              <div
-                class="card text-start p-0 m-3 shadow"
-                style={{ maxWidth: 450 }}
-              >
-                <div class="card-header">Company Name</div>
-                <div class="card-body">
-                  <h5 class="card-title">Position</h5>
-                  <p class="card-text">
-                    Job Details: Where it is and maybe possible pay on it
-                  </p>
-
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop"
-                  >
-                    Apply
-                  </button>
-                </div>
-              </div>
+                    <div class="card-header">{job.companyName}</div>
+                    <div class="card-body">
+                      <h5 class="card-title">{job.position}</h5>
+                      <p class="card-text">{job.details}</p>
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop"
+                      >
+                        Apply
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 

@@ -20,8 +20,8 @@ export default class Login extends Component {
 
     try {
       const { Email, password } = this.state;
-      const login = await this.auth.signInWithEmailAndPassword(Email, password);
-      console.log(login);
+      await this.auth.signInWithEmailAndPassword(Email, password);
+      this.setState({ Email: "", password: "", error: "" });
     } catch (err) {
       this.setState({ error: err.message });
     }
